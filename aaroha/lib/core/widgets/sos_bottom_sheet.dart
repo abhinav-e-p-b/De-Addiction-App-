@@ -15,11 +15,21 @@ class SosBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final sheetBg = isDark
+        ? AarohaColors.darkSurfaceContainer
+        : AarohaColors.surface;
+    final tileBg = isDark
+        ? AarohaColors.darkSurfaceContainerLow
+        : AarohaColors.surfaceContainerLow;
+
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AarohaColors.surface,
+        color: sheetBg,
         borderRadius: BorderRadius.circular(AarohaConstants.radiusXl),
       ),
       child: Column(
@@ -33,12 +43,12 @@ class SosBottomSheet extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: AarohaColors.tertiary.withOpacity(0.12),
+                  color: colorScheme.tertiary.withOpacity(0.12),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.crisis_alert_rounded,
-                  color: AarohaColors.tertiary,
+                  color: colorScheme.tertiary,
                   size: 26,
                 ),
               ),
@@ -49,13 +59,13 @@ class SosBottomSheet extends StatelessWidget {
                   Text(
                     'Crisis Support',
                     style: AarohaTextStyles.titleLg.copyWith(
-                      color: AarohaColors.onSurface,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                   Text(
                     'You are not alone. Help is here.',
                     style: AarohaTextStyles.bodySm.copyWith(
-                      color: AarohaColors.outline,
+                      color: colorScheme.outline,
                     ),
                   ),
                 ],
@@ -72,6 +82,7 @@ class SosBottomSheet extends StatelessWidget {
                 name: h['name']!,
                 label: h['label']!,
                 note: h['note'],
+                tileBg: tileBg,
                 onTap: () => _call(h['number']!),
               ),
             ),
@@ -82,7 +93,7 @@ class SosBottomSheet extends StatelessWidget {
             child: Text(
               'Anonymous · Confidential',
               style: AarohaTextStyles.overline.copyWith(
-                color: AarohaColors.outline,
+                color: colorScheme.outline,
               ),
             ),
           ),
@@ -94,9 +105,11 @@ class SosBottomSheet extends StatelessWidget {
             child: OutlinedButton(
               onPressed: () => Navigator.pop(context),
               style: OutlinedButton.styleFrom(
-                foregroundColor: AarohaColors.onSurface,
+                foregroundColor: colorScheme.onSurface,
                 side: BorderSide.none,
-                backgroundColor: AarohaColors.surfaceContainerHigh,
+                backgroundColor: isDark
+                    ? AarohaColors.darkSurfaceContainerHigh
+                    : AarohaColors.surfaceContainerHigh,
                 minimumSize: const Size.fromHeight(52),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -105,7 +118,7 @@ class SosBottomSheet extends StatelessWidget {
               child: Text(
                 'Close',
                 style: AarohaTextStyles.labelLg.copyWith(
-                  color: AarohaColors.onSurface,
+                  color: colorScheme.onSurface,
                 ),
               ),
             ),
@@ -120,23 +133,27 @@ class _HelplineTile extends StatelessWidget {
   final String name;
   final String label;
   final String? note;
+  final Color tileBg;
   final VoidCallback onTap;
 
   const _HelplineTile({
     required this.name,
     required this.label,
     this.note,
+    required this.tileBg,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
-          color: AarohaColors.surfaceContainerLow,
+          color: tileBg,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -148,13 +165,13 @@ class _HelplineTile extends StatelessWidget {
                   Text(
                     name.toUpperCase(),
                     style: AarohaTextStyles.overline.copyWith(
-                      color: AarohaColors.tertiary,
+                      color: colorScheme.tertiary,
                     ),
                   ),
                   Text(
                     label,
                     style: AarohaTextStyles.labelLg.copyWith(
-                      color: AarohaColors.onSurface,
+                      color: colorScheme.onSurface,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -162,7 +179,7 @@ class _HelplineTile extends StatelessWidget {
                     Text(
                       note!,
                       style: AarohaTextStyles.bodySm.copyWith(
-                        color: AarohaColors.outline,
+                        color: colorScheme.outline,
                       ),
                     ),
                 ],
@@ -172,12 +189,12 @@ class _HelplineTile extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: AarohaColors.primary.withOpacity(0.08),
+                color: colorScheme.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.call_rounded,
-                color: AarohaColors.primary,
+                color: colorScheme.primary,
                 size: 20,
               ),
             ),

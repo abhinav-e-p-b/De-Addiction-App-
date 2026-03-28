@@ -21,15 +21,18 @@ class AarohaAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return AppBar(
-      backgroundColor: AarohaColors.surface,
+      backgroundColor: colorScheme.surface,
       scrolledUnderElevation: 0.5,
-      shadowColor: AarohaColors.outlineVariant.withOpacity(0.3),
+      shadowColor: colorScheme.outlineVariant.withOpacity(0.3),
       leading: Padding(
         padding: const EdgeInsets.only(left: 8),
         child: Builder(
           builder: (ctx) => IconButton(
-            icon: const Icon(Icons.menu_rounded, color: AarohaColors.primary),
+            icon: Icon(Icons.menu_rounded, color: colorScheme.primary),
             onPressed: () => Scaffold.of(ctx).openDrawer(),
           ),
         ),
@@ -40,14 +43,16 @@ class AarohaAppBar extends StatelessWidget implements PreferredSizeWidget {
           Text(
             AarohaConstants.appName,
             style: AarohaTextStyles.titleLg.copyWith(
-              color: AarohaColors.primary,
+              color: colorScheme.primary,
               height: 1,
             ),
           ),
           Text(
             AarohaConstants.appTagline,
             style: AarohaTextStyles.overline.copyWith(
-              color: AarohaColors.primaryContainer.withOpacity(0.8),
+              color: isDark
+                  ? AarohaColors.inversePrimary.withOpacity(0.6)
+                  : AarohaColors.primaryContainer.withOpacity(0.8),
               letterSpacing: 1.2,
               height: 1,
             ),
@@ -60,25 +65,27 @@ class AarohaAppBar extends StatelessWidget implements PreferredSizeWidget {
           GestureDetector(
             onTap: onSOS,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               margin: const EdgeInsets.only(right: 4),
               decoration: BoxDecoration(
-                color: AarohaColors.tertiary.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(AarohaConstants.radiusFull),
+                color: colorScheme.tertiary.withOpacity(0.12),
+                borderRadius:
+                    BorderRadius.circular(AarohaConstants.radiusFull),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.emergency_rounded,
-                    color: AarohaColors.tertiary,
+                    color: colorScheme.tertiary,
                     size: 14,
                   ),
                   const SizedBox(width: 4),
                   Text(
                     'SOS',
                     style: AarohaTextStyles.overline.copyWith(
-                      color: AarohaColors.tertiary,
+                      color: colorScheme.tertiary,
                       letterSpacing: 1.0,
                     ),
                   ),
@@ -87,14 +94,16 @@ class AarohaAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         // Avatar
-        const Padding(
-          padding: EdgeInsets.only(right: 12),
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
           child: CircleAvatar(
             radius: 18,
-            backgroundColor: AarohaColors.surfaceContainerHighest,
+            backgroundColor: isDark
+                ? AarohaColors.darkSurfaceContainerHighest
+                : AarohaColors.surfaceContainerHighest,
             child: Icon(
               Icons.person_rounded,
-              color: AarohaColors.primary,
+              color: colorScheme.primary,
               size: 20,
             ),
           ),

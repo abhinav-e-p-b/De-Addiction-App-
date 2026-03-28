@@ -49,8 +49,11 @@ class AarohaDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Drawer(
-      backgroundColor: AarohaColors.surface,
+      backgroundColor: colorScheme.surface,
       child: Column(
         children: [
           // ── Header ─────────────────────────────────────
@@ -69,7 +72,8 @@ class AarohaDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 56, height: 56,
+                  width: 56,
+                  height: 56,
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(16),
@@ -96,7 +100,8 @@ class AarohaDrawer extends StatelessWidget {
                 const SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 14, vertical: 6,
+                    horizontal: 14,
+                    vertical: 6,
                   ),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.15),
@@ -129,7 +134,8 @@ class AarohaDrawer extends StatelessWidget {
           // ── Nav Items ──────────────────────────────────
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
               children: _items.map((item) {
                 final isCurrent =
                     GoRouterState.of(context).uri.path == item.route;
@@ -141,8 +147,9 @@ class AarohaDrawer extends StatelessWidget {
                       context.go(item.route);
                     },
                     selected: isCurrent,
-                    selectedTileColor:
-                        AarohaColors.surfaceContainerHighest,
+                    selectedTileColor: isDark
+                        ? AarohaColors.darkSurfaceContainerHighest
+                        : AarohaColors.surfaceContainerHighest,
                     tileColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
@@ -150,29 +157,30 @@ class AarohaDrawer extends StatelessWidget {
                     leading: Icon(
                       item.icon,
                       color: isCurrent
-                          ? AarohaColors.primary
-                          : AarohaColors.outline,
+                          ? colorScheme.primary
+                          : colorScheme.outline,
                       size: 22,
                     ),
                     title: Text(
                       item.label,
                       style: AarohaTextStyles.labelLg.copyWith(
                         color: isCurrent
-                            ? AarohaColors.primary
-                            : AarohaColors.onSurface,
+                            ? colorScheme.primary
+                            : colorScheme.onSurface,
                       ),
                     ),
                     subtitle: Text(
                       item.subtitle,
                       style: AarohaTextStyles.bodySm.copyWith(
-                        color: AarohaColors.outline,
+                        color: colorScheme.outline,
                       ),
                     ),
                     trailing: isCurrent
                         ? Container(
-                            width: 6, height: 6,
-                            decoration: const BoxDecoration(
-                              color: AarohaColors.primary,
+                            width: 6,
+                            height: 6,
+                            decoration: BoxDecoration(
+                              color: colorScheme.primary,
                               shape: BoxShape.circle,
                             ),
                           )
@@ -186,27 +194,29 @@ class AarohaDrawer extends StatelessWidget {
           // ── Footer ─────────────────────────────────────
           Padding(
             padding: EdgeInsets.fromLTRB(
-              16, 0, 16,
+              16,
+              0,
+              16,
               MediaQuery.of(context).padding.bottom + 16,
             ),
             child: Column(
               children: [
-                const Divider(
-                  color: AarohaColors.outlineVariant,
+                Divider(
+                  color: colorScheme.outlineVariant,
                   thickness: 0.5,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   'Anonymous · Private · Safe',
                   style: AarohaTextStyles.bodySm.copyWith(
-                    color: AarohaColors.outline,
+                    color: colorScheme.outline,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   'v1.0.0',
                   style: AarohaTextStyles.bodySm.copyWith(
-                    color: AarohaColors.outlineVariant,
+                    color: colorScheme.outlineVariant,
                     fontSize: 10,
                   ),
                 ),

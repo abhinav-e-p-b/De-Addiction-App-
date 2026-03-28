@@ -73,12 +73,16 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
         Expanded(
-          child: Text(title, style: AarohaTextStyles.titleMd.copyWith(
-            color: AarohaColors.onSurface,
-          )),
+          child: Text(
+            title,
+            style: AarohaTextStyles.titleMd.copyWith(
+              color: colorScheme.onSurface,
+            ),
+          ),
         ),
         if (actionLabel != null)
           GestureDetector(
@@ -86,7 +90,7 @@ class SectionHeader extends StatelessWidget {
             child: Text(
               actionLabel!,
               style: AarohaTextStyles.labelMd.copyWith(
-                color: AarohaColors.primary,
+                color: colorScheme.primary,
               ),
             ),
           ),
@@ -110,6 +114,9 @@ class AarohaFilterChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
@@ -117,16 +124,18 @@ class AarohaFilterChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected
-              ? AarohaColors.primary
-              : AarohaColors.surfaceContainerHigh,
+              ? colorScheme.primary
+              : (isDark
+                  ? AarohaColors.darkSurfaceContainerHigh
+                  : AarohaColors.surfaceContainerHigh),
           borderRadius: BorderRadius.circular(AarohaConstants.radiusFull),
         ),
         child: Text(
           label,
           style: AarohaTextStyles.labelMd.copyWith(
             color: isSelected
-                ? AarohaColors.onPrimary
-                : AarohaColors.onSurfaceVariant,
+                ? colorScheme.onPrimary
+                : colorScheme.onSurfaceVariant,
           ),
         ),
       ),
@@ -149,16 +158,17 @@ class OverlineTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: backgroundColor ?? AarohaColors.secondaryContainer,
+        color: backgroundColor ?? colorScheme.secondaryContainer,
         borderRadius: BorderRadius.circular(AarohaConstants.radiusFull),
       ),
       child: Text(
         label.toUpperCase(),
         style: AarohaTextStyles.overline.copyWith(
-          color: textColor ?? AarohaColors.onSecondaryContainer,
+          color: textColor ?? colorScheme.onSecondaryContainer,
         ),
       ),
     );
@@ -166,15 +176,26 @@ class OverlineTag extends StatelessWidget {
 }
 
 // ── Ambient shadow helper ──────────────────────────────────────
-List<BoxShadow> get ambientShadow => [
-  BoxShadow(
-    color: AarohaColors.onSurface.withOpacity(
-      AarohaConstants.ambientShadowOpacity,
-    ),
-    blurRadius: AarohaConstants.ambientShadowBlur,
-    offset: const Offset(0, 4),
-  ),
-];
+List<BoxShadow> ambientShadow(BuildContext context) => [
+      BoxShadow(
+        color: Theme.of(context)
+            .colorScheme
+            .onSurface
+            .withOpacity(AarohaConstants.ambientShadowOpacity),
+        blurRadius: AarohaConstants.ambientShadowBlur,
+        offset: const Offset(0, 4),
+      ),
+    ];
+
+// Keep the old getter for backward compat (light mode values)
+List<BoxShadow> get ambientShadowDefault => [
+      BoxShadow(
+        color: AarohaColors.onSurface
+            .withOpacity(AarohaConstants.ambientShadowOpacity),
+        blurRadius: AarohaConstants.ambientShadowBlur,
+        offset: const Offset(0, 4),
+      ),
+    ];
 
 // ── Tappable Card wrapper ─────────────────────────────────────
 class TappableCard extends StatefulWidget {
@@ -224,6 +245,13 @@ class _TappableCardState extends State<TappableCard>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final defaultCardColor = isDark
+        ? AarohaColors.darkSurfaceContainerLow
+        : AarohaColors.surfaceContainerLow;
+
     return GestureDetector(
       onTapDown: (_) => _ctrl.forward(),
       onTapUp: (_) async {
@@ -240,7 +268,7 @@ class _TappableCardState extends State<TappableCard>
         child: Container(
           padding: widget.padding,
           decoration: BoxDecoration(
-            color: widget.color ?? AarohaColors.surfaceContainerLow,
+            color: widget.color ?? defaultCardColor,
             borderRadius: BorderRadius.circular(widget.radius),
           ),
           child: widget.child,

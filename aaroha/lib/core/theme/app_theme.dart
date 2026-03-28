@@ -6,6 +6,9 @@ import 'app_text_styles.dart';
 class AarohaTheme {
   AarohaTheme._();
 
+  // ─────────────────────────────────────────────────────────
+  // LIGHT THEME
+  // ─────────────────────────────────────────────────────────
   static ThemeData get light {
     const colorScheme = ColorScheme(
       brightness: Brightness.light,
@@ -43,7 +46,6 @@ class AarohaTheme {
       colorScheme: colorScheme,
       scaffoldBackgroundColor: AarohaColors.background,
 
-      // ── AppBar ───────────────────────────────────────────
       appBarTheme: AppBarTheme(
         backgroundColor: AarohaColors.surface,
         foregroundColor: AarohaColors.onSurface,
@@ -57,7 +59,6 @@ class AarohaTheme {
         iconTheme: const IconThemeData(color: AarohaColors.primary),
       ),
 
-      // ── Bottom Nav ────────────────────────────────────────
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AarohaColors.surface.withOpacity(0.92),
         indicatorColor: AarohaColors.surfaceContainerHighest,
@@ -84,8 +85,6 @@ class AarohaTheme {
         height: 72,
       ),
 
-      // ── Cards ─────────────────────────────────────────────
-      // No border rule — depth via tonal surface shifts
       cardTheme: CardThemeData(
         color: AarohaColors.surfaceContainerLow,
         elevation: 0,
@@ -95,7 +94,6 @@ class AarohaTheme {
         margin: EdgeInsets.zero,
       ),
 
-      // ── Elevated Button (Primary CTA) ─────────────────────
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AarohaColors.primary,
@@ -109,7 +107,6 @@ class AarohaTheme {
         ),
       ),
 
-      // ── Filled Button ────────────────────────────────────
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           backgroundColor: AarohaColors.primary,
@@ -122,7 +119,6 @@ class AarohaTheme {
         ),
       ),
 
-      // ── Outlined Button (Secondary) ───────────────────────
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AarohaColors.primary,
@@ -138,7 +134,6 @@ class AarohaTheme {
         ),
       ),
 
-      // ── Text Button ───────────────────────────────────────
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AarohaColors.primary,
@@ -146,8 +141,6 @@ class AarohaTheme {
         ),
       ),
 
-      // ── Input Decoration ─────────────────────────────────
-      // Filled style — Material 3
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AarohaColors.surfaceContainerHigh,
@@ -166,13 +159,13 @@ class AarohaTheme {
             width: 2,
           ),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
         hintStyle: AarohaTextStyles.bodyMd.copyWith(
           color: AarohaColors.outline,
         ),
       ),
 
-      // ── Chip ─────────────────────────────────────────────
       chipTheme: ChipThemeData(
         backgroundColor: AarohaColors.surfaceContainerHigh,
         selectedColor: AarohaColors.primary,
@@ -185,7 +178,6 @@ class AarohaTheme {
         pressElevation: 0,
       ),
 
-      // ── FAB ──────────────────────────────────────────────
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: AarohaColors.tertiary,
         foregroundColor: AarohaColors.onTertiary,
@@ -195,15 +187,12 @@ class AarohaTheme {
         shape: CircleBorder(),
       ),
 
-      // ── Divider ───────────────────────────────────────────
-      // DESIGN.md: No divider lines — use spacing instead
       dividerTheme: const DividerThemeData(
         color: Colors.transparent,
         thickness: 0,
         space: 0,
       ),
 
-      // ── List Tile ────────────────────────────────────────
       listTileTheme: ListTileThemeData(
         tileColor: AarohaColors.surfaceContainerLow,
         shape: RoundedRectangleBorder(
@@ -211,7 +200,6 @@ class AarohaTheme {
         ),
       ),
 
-      // ── Bottom Sheet ─────────────────────────────────────
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: AarohaColors.surface,
         surfaceTintColor: Colors.transparent,
@@ -221,7 +209,6 @@ class AarohaTheme {
         elevation: 0,
       ),
 
-      // ── Snack Bar ────────────────────────────────────────
       snackBarTheme: SnackBarThemeData(
         backgroundColor: AarohaColors.inverseSurface,
         contentTextStyle: AarohaTextStyles.bodyMd.copyWith(
@@ -233,7 +220,240 @@ class AarohaTheme {
         behavior: SnackBarBehavior.floating,
       ),
 
-      // ── Typography ───────────────────────────────────────
+      textTheme: TextTheme(
+        displayLarge: AarohaTextStyles.displayLg,
+        displayMedium: AarohaTextStyles.displayMd,
+        headlineLarge: AarohaTextStyles.headlineLg,
+        headlineMedium: AarohaTextStyles.headlineMd,
+        headlineSmall: AarohaTextStyles.headlineSm,
+        titleLarge: AarohaTextStyles.titleLg,
+        titleMedium: AarohaTextStyles.titleMd,
+        bodyLarge: AarohaTextStyles.bodyLg,
+        bodyMedium: AarohaTextStyles.bodyMd,
+        bodySmall: AarohaTextStyles.bodySm,
+        labelLarge: AarohaTextStyles.labelLg,
+        labelMedium: AarohaTextStyles.labelMd,
+        labelSmall: AarohaTextStyles.labelSm,
+      ),
+    );
+  }
+
+  // ─────────────────────────────────────────────────────────
+  // DARK THEME
+  // ─────────────────────────────────────────────────────────
+  static ThemeData get dark {
+    const colorScheme = ColorScheme(
+      brightness: Brightness.dark,
+      primary: AarohaColors.inversePrimary,
+      onPrimary: AarohaColors.onPrimaryFixed,
+      primaryContainer: AarohaColors.darkPrimaryContainer,
+      onPrimaryContainer: AarohaColors.onPrimaryContainer,
+      secondary: AarohaColors.secondaryFixedDim,
+      onSecondary: AarohaColors.onSecondaryFixed,
+      secondaryContainer: Color(0xFF1E3831),
+      onSecondaryContainer: AarohaColors.secondaryFixed,
+      tertiary: AarohaColors.tertiaryFixedDim,
+      onTertiary: AarohaColors.onTertiaryFixed,
+      tertiaryContainer: AarohaColors.tertiaryContainer,
+      onTertiaryContainer: AarohaColors.onTertiaryContainer,
+      error: Color(0xFFFFB4AB),
+      onError: Color(0xFF690005),
+      errorContainer: Color(0xFF93000A),
+      onErrorContainer: Color(0xFFFFDAD6),
+      surface: AarohaColors.darkSurface,
+      onSurface: AarohaColors.darkOnSurface,
+      onSurfaceVariant: AarohaColors.darkOnSurfaceVariant,
+      inverseSurface: AarohaColors.darkInverseSurface,
+      onInverseSurface: AarohaColors.darkInverseOnSurface,
+      inversePrimary: AarohaColors.primary,
+      outline: AarohaColors.darkOutline,
+      outlineVariant: AarohaColors.darkOutlineVariant,
+      surfaceTint: AarohaColors.inversePrimary,
+      scrim: Color(0xFF000000),
+      shadow: Color(0xFF000000),
+    );
+
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: colorScheme,
+      scaffoldBackgroundColor: AarohaColors.darkBackground,
+
+      appBarTheme: AppBarTheme(
+        backgroundColor: AarohaColors.darkSurface,
+        foregroundColor: AarohaColors.darkOnSurface,
+        elevation: 0,
+        scrolledUnderElevation: 0.5,
+        shadowColor: AarohaColors.darkOutlineVariant.withOpacity(0.3),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        titleTextStyle: AarohaTextStyles.titleLg.copyWith(
+          color: AarohaColors.inversePrimary,
+        ),
+        iconTheme: const IconThemeData(color: AarohaColors.inversePrimary),
+      ),
+
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: AarohaColors.darkSurface.withOpacity(0.92),
+        indicatorColor: AarohaColors.darkSurfaceContainerHighest,
+        indicatorShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return AarohaTextStyles.labelSm.copyWith(
+              color: AarohaColors.inversePrimary,
+            );
+          }
+          return AarohaTextStyles.labelSm.copyWith(
+            color: AarohaColors.darkOutline,
+          );
+        }),
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const IconThemeData(
+                color: AarohaColors.inversePrimary, size: 24);
+          }
+          return const IconThemeData(
+              color: AarohaColors.darkOutline, size: 24);
+        }),
+        elevation: 0,
+        height: 72,
+      ),
+
+      cardTheme: CardThemeData(
+        color: AarohaColors.darkSurfaceContainerLow,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        margin: EdgeInsets.zero,
+      ),
+
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AarohaColors.inversePrimary,
+          foregroundColor: AarohaColors.onPrimaryFixed,
+          elevation: 0,
+          minimumSize: const Size.fromHeight(56),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          textStyle: AarohaTextStyles.labelLg,
+        ),
+      ),
+
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: AarohaColors.inversePrimary,
+          foregroundColor: AarohaColors.onPrimaryFixed,
+          minimumSize: const Size.fromHeight(56),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          textStyle: AarohaTextStyles.labelLg,
+        ),
+      ),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AarohaColors.inversePrimary,
+          minimumSize: const Size.fromHeight(56),
+          side: const BorderSide(
+            color: AarohaColors.darkOutlineVariant,
+            width: 1,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          textStyle: AarohaTextStyles.labelLg,
+        ),
+      ),
+
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AarohaColors.inversePrimary,
+          textStyle: AarohaTextStyles.labelLg,
+        ),
+      ),
+
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AarohaColors.darkSurfaceContainerHigh,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(
+            color: AarohaColors.inversePrimary,
+            width: 2,
+          ),
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+        hintStyle: AarohaTextStyles.bodyMd.copyWith(
+          color: AarohaColors.darkOutline,
+        ),
+      ),
+
+      chipTheme: ChipThemeData(
+        backgroundColor: AarohaColors.darkSurfaceContainerHigh,
+        selectedColor: AarohaColors.inversePrimary,
+        labelStyle: AarohaTextStyles.labelMd,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide.none,
+        ),
+        elevation: 0,
+        pressElevation: 0,
+      ),
+
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: AarohaColors.tertiaryContainer,
+        foregroundColor: AarohaColors.onTertiaryContainer,
+        elevation: 0,
+        focusElevation: 0,
+        hoverElevation: 0,
+        shape: CircleBorder(),
+      ),
+
+      dividerTheme: const DividerThemeData(
+        color: Colors.transparent,
+        thickness: 0,
+        space: 0,
+      ),
+
+      listTileTheme: ListTileThemeData(
+        tileColor: AarohaColors.darkSurfaceContainerLow,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: AarohaColors.darkSurfaceContainer,
+        surfaceTintColor: Colors.transparent,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+        ),
+        elevation: 0,
+      ),
+
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: AarohaColors.darkInverseSurface,
+        contentTextStyle: AarohaTextStyles.bodyMd.copyWith(
+          color: AarohaColors.darkInverseOnSurface,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        behavior: SnackBarBehavior.floating,
+      ),
+
       textTheme: TextTheme(
         displayLarge: AarohaTextStyles.displayLg,
         displayMedium: AarohaTextStyles.displayMd,
