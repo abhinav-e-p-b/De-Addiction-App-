@@ -29,7 +29,7 @@ class AarohaTheme {
       onSurface: AarohaColors.onSurface,
       onSurfaceVariant: AarohaColors.onSurfaceVariant,
       inverseSurface: AarohaColors.inverseSurface,
-      inverseOnSurface: AarohaColors.inverseOnSurface,
+      onInverseSurface: AarohaColors.inverseOnSurface,
       inversePrimary: AarohaColors.inversePrimary,
       outline: AarohaColors.outline,
       outlineVariant: AarohaColors.outlineVariant,
@@ -86,7 +86,7 @@ class AarohaTheme {
 
       // ── Cards ─────────────────────────────────────────────
       // No border rule — depth via tonal surface shifts
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AarohaColors.surfaceContainerLow,
         elevation: 0,
         shape: RoundedRectangleBorder(
