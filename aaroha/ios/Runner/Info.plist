@@ -41,9 +41,18 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<!-- Location permission for Sangam map -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Aaroha uses your location to show recovery centres and events near you.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Aaroha uses your location to show recovery centres and events near you.</string>
+	<!-- Allow arbitrary loads for development -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
